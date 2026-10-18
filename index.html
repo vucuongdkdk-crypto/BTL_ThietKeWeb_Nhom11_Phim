@@ -1,0 +1,185 @@
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <title>Nhóm11 phim - Đặt vé xem phim</title>
+  <link rel="stylesheet" href="style.css?v=2">
+</head>
+<body onload="showHome()" style="background: url('nen.jpg') center/cover no-repeat fixed">
+
+  <div class="header">
+    <a class="logo" href="#home" onclick="showHome()">Nhóm11 Phim<span>.</span></a>
+    <div class="nav">
+      <a href="#home" onclick="showHome()">Trang chủ</a>
+      <a href="#movies" onclick="showMovies()">Phim</a>
+      <a href="#tickets" onclick="showTickets()">Vé của tôi</a>
+    </div>
+  </div>
+
+  <div id="home-page" class="page">
+    <div class="hero" style="background: url('benkianganha.png') center/cover no-repeat">
+      <div class="hero-content">
+        <p class="category">RẠP PHIM CỦA BẠN</p>
+        <h1>Một chiếc vé,<br>một thế giới khác.</h1>
+        <p>Chọn phim yêu thích, tìm chỗ ngồi ưng ý và sẵn sàng tận hưởng bộ phim.</p>
+      </div>
+      <div class="hero-poster" style="background: url('muahenamay.png') center/cover no-repeat"></div>
+    </div>
+
+    <div class="container" id="movies">
+      <h2 style="color:#fff">Chọn phim hôm nay</h2>
+      <div id="movie-list" class="movie-list">
+
+        <div class="movie-card" data-movie-id="1" data-price="95000"
+             data-description="Một chuyến phiêu lưu giữa sa mạc.">
+          <div class="movie-image" style="background-image:url('xucat.png')"></div>
+          <p class="category movie-category">Phiêu lưu</p>
+          <h3 class="movie-name">Cồn Cát Cuối Cùng</h3>
+          <p>Giá vé từ 95.000 đồng</p>
+          <button class="button button-light" onclick="showDetail(1)">Chi tiết</button>
+          <button class="button" onclick="showBooking(1)">Đặt vé</button>
+        </div>
+
+        <div class="movie-card" data-movie-id="2" data-price="85000"
+             data-description="Câu chuyện về tình bạn và mùa hè.">
+          <div class="movie-image" style="background-image:url('muahenamay.png')"></div>
+          <p class="category movie-category">Tâm lý</p>
+          <h3 class="movie-name">Mùa Hè Năm Ấy</h3>
+          <p>Giá vé từ 85.000 đồng</p>
+          <button class="button button-light" onclick="showDetail(2)">Chi tiết</button>
+          <button class="button" onclick="showBooking(2)">Đặt vé</button>
+        </div>
+
+        <div class="movie-card" data-movie-id="3" data-price="95000"
+             data-description="Chuyến đi tìm tín hiệu trong vũ trụ.">
+          <div class="movie-image" style="background-image:url('benkianganha.png')"></div>
+          <p class="category movie-category">Phiêu lưu</p>
+          <h3 class="movie-name">Bên Kia Ngân Hà</h3>
+          <p>Giá vé từ 95.000 đồng</p>
+          <button class="button button-light" onclick="showDetail(3)">Chi tiết</button>
+          <button class="button" onclick="showBooking(3)">Đặt vé</button>
+        </div>
+
+        <div class="movie-card" data-movie-id="4" data-price="75000"
+             data-description="Cuộc phiêu lưu trong khu rừng kỳ diệu.">
+          <div class="movie-image" style="background-image:url('khurungbiethat.png')"></div>
+          <p class="category movie-category">Hoạt hình</p>
+          <h3 class="movie-name">Khu Rừng Biết Hát</h3>
+          <p>Giá vé từ 75.000 đồng</p>
+          <button class="button button-light" onclick="showDetail(4)">Chi tiết</button>
+          <button class="button" onclick="showBooking(4)">Đặt vé</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="detail-page" class="page">
+    <div class="container">
+      <p><a href="#home" onclick="showHome()">← Trang chủ</a></p>
+      <h1>Thông tin phim</h1>
+      <div id="movie-detail"></div>
+    </div>
+  </div>
+
+  <div id="booking-page" class="page" data-seat-error="Vui lòng chọn ít nhất một ghế.">
+    <div class="container">
+      <p><a href="#home" onclick="showHome()">← Trang chủ</a></p>
+      <p class="category" style="color:#fff">BƯỚC 1 · CHỌN GHẾ</p>
+      <div class="booking-layout">
+        <div class="booking-card">
+          <h2 id="movie-name"></h2>
+          <div class="screen">MÀN ẢNH</div>
+          <div id="seat-list" class="seat-list">
+            <label class="seat"><input type="checkbox" name="seat" value="A1" onclick="countPrice()"> A1</label>
+            <label class="seat"><input type="checkbox" name="seat" value="A2" onclick="countPrice()"> A2</label>
+            <label class="seat"><input type="checkbox" name="seat" value="A3" onclick="countPrice()"> A3</label>
+            <br>
+            <label class="seat"><input type="checkbox" name="seat" value="B1" onclick="countPrice()"> B1</label>
+            <label class="seat"><input type="checkbox" name="seat" value="B2" onclick="countPrice()"> B2</label>
+            <label class="seat"><input type="checkbox" name="seat" value="B3" onclick="countPrice()"> B3</label>
+          </div>
+        </div>
+        <div class="summary-card">
+          <p>Ghế: <b id="selected-seats" data-empty-text="Chưa chọn">Chưa chọn</b></p>
+          <p>Tổng tiền: <b id="total-price">0 đồng</b></p>
+          <button class="button" onclick="showPayment()">Tiếp tục thanh toán</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="payment-page" class="page">
+    <div class="container">
+      <p><a href="#home" onclick="showHome()">← Trang chủ</a></p>
+      <p class="category" style="color:#fff">BƯỚC 2 · XÁC NHẬN</p>
+      <h1>Thông tin đặt vé</h1>
+      <div class="form-box">
+        <div id="payment-info">
+          <p>Phim: <span id="payment-movie"></span></p>
+          <p>Ghế: <span id="payment-seats"></span></p>
+          <p>Tổng tiền: <span id="payment-total"></span></p>
+        </div>
+        <form onsubmit="return finishPayment()">
+          <label>Họ và tên
+            <input id="customer-name" placeholder="Nhập họ tên" required>
+          </label>
+          <button class="button" type="submit">Xác nhận đặt vé</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="success-page" class="page">
+    <div class="container">
+      <p class="category" style="color:#fff">BƯỚC 3 · HOÀN TẤT</p>
+      <h1>Kết quả đặt vé</h1>
+      <div id="success-info"></div>
+    </div>
+  </div>
+
+  <div id="tickets-page" class="page">
+    <div class="container">
+      <p><a href="#home" onclick="showHome()">← Trang chủ</a></p>
+      <h1>Vé của tôi</h1>
+      <div id="ticket-list"></div>
+    </div>
+  </div>
+
+  <footer>© Nhom11 Phim. All rights reserved.</footer>
+  <span id="currency-unit" hidden> đồng</span>
+
+  <template id="movie-detail-template">
+    <div class="detail-card">
+      <div class="movie-image"></div>
+      <div>
+        <p class="category detail-category"></p>
+        <h2 class="detail-name"></h2>
+        <p class="detail-description"></p>
+        <p>Giá vé: <span class="detail-price"></span></p>
+        <button class="button detail-booking-button">Đặt vé</button>
+      </div>
+    </div>
+  </template>
+
+  <template id="ticket-template">
+    <div class="ticket-box">
+      <p class="category ticket-status" hidden>ĐẶT VÉ THÀNH CÔNG</p>
+      <h2 class="ticket-movie"></h2>
+      <p>Mã vé: <span class="ticket-id"></span></p>
+      <p>Người đặt: <span class="ticket-name"></span></p>
+      <p>Ghế: <span class="ticket-seats"></span></p>
+      <p>Tổng tiền: <span class="ticket-total"></span></p>
+      <button class="button ticket-action" hidden>Vé của tôi</button>
+    </div>
+  </template>
+
+  <template id="no-ticket-template">
+    <div class="message-card">
+      <p>Bạn chưa có vé nào.</p>
+      <button class="button" onclick="showHome()">Chọn phim</button>
+    </div>
+  </template>
+
+  <script src="index.js"></script>
+</body>
+</html>
